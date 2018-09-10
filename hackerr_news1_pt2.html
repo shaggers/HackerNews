@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Hacker News</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		let url = 'https://newsapi.org/v2/top-headlines?sources=hacker-news&apiKey=1fab6ab0714c400b8a4c83600a84c521'
+
+		fetch(url)
+			.then(r => {
+				return r.json();
+			})
+			.then(data => {
+				let results = data.results;
+				let newsList = document.createElement('ul');
+				let body = document.querySelector('body');
+				body.appendChild(newsList);
+				results.map(news => {
+					let newsItem = document.createElement('li');
+					newsItem.innerHTML =
+						'<a href="' + news.href + '">' + news.title + "</a>";
+					newsList.appendChild(newsItem);
+				});
+			})
+			.catch(e => {
+				console.log('An error occurred: ${e}');
+			});
+	</script>
+
+</body>
+</html>
